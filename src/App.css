@@ -1,3 +1,53 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
 .App {
   text-align: center;
+}
+.Header {
+  text-align: center;
+  font-size: 4vh;
+  background-color: rgb(255, 255, 255);
+  color: #eb1b24;
+}
+
+.nav-bar {
+  text-align: center;
+  color: black;
+  font-size: 3vh;
+  border-bottom: 1px solid;
+}
+
+.Link {
+  margin: 5px;
+  color: black;
+  text-decoration: underline overline;
+}
+.Link:hover {
+  background-color: #ffa4a9;
+}
+
+.Link:active {
+  background-color: #fb666d;
+}
+.articles-container {
+  display: grid;
+  justify-content: center;
+}
+
+.article-card {
+  text-align: left;
+  margin: auto;
+  width: 90vw;
+  border: 2px solid black;
+  margin: 4px;
+}
+.article-card:hover {
+  border-color: #eb1b24;
+}
+
+.article-timestamp {
+  text-align: right;
+  color: grey;
 }
