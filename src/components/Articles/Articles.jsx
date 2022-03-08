@@ -1,16 +1,18 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { getArticles } from "../api";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getArticles, getArticlesByTopic } from "../api";
 import ArticleCard from "./ArticleCard";
+import ArticleNav from "./ArticleNav";
 
 export default function Articles() {
-  const [topics, setTopics] = useState([]);
   const [articles, setArticles] = useState([]);
+  const { topic } = useParams();
   useEffect(() => {
-    getArticles().then(setArticles);
-  }, []);
+    getArticles(topic).then(setArticles);
+  }, [topic]);
   return (
     <div className="articles-container">
-      Articles
+      <ArticleNav />
       <>
         {articles.map((article) => {
           return <ArticleCard key={article.title} article={article} />;
