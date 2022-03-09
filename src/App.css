@@ -51,6 +51,7 @@
   text-align: right;
   color: grey;
 }
+
 .article-details {
   width: 100%;
   display: grid;
@@ -93,7 +94,6 @@
   height: fit-content;
   display: inline-block;
   margin-left: 10vw;
-  padding-right: 10px;
 }
 
 .article-body {
