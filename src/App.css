@@ -4,6 +4,9 @@
 }
 .App {
   text-align: center;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
 }
 .Header {
   text-align: center;
@@ -55,7 +58,7 @@
 .article-details {
   width: 100%;
   display: grid;
-  grid-template-columns: 65vw auto;
+  grid-template-columns: 65vw 30vw;
   grid-template-rows: "auto auto auto";
   grid-template-areas:
     "body stats"
@@ -80,7 +83,6 @@
   display: inline-block;
   height: fit-content;
   border: grey 1px solid;
-  width: auto;
 }
 .article-stats {
   display: inline-block;
