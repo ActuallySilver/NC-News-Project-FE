@@ -12,6 +12,7 @@ export default function SingleArticle() {
   const [articleComments, setArticleComments] = useState([]);
   const [voted, setVoted] = useState(false);
   const [newComment, setNewComment] = useState("");
+  const [disableCommenting, setDisableCommenting] = useState(false);
   const { user } = useContext(UserContext);
   const windowSize = UseWindowSize();
   useEffect(() => {
@@ -71,14 +72,18 @@ export default function SingleArticle() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              if (!user.username) return window.alert("Please sign in");
-              if (newComment.trim() === "") return window.alert("Please write a comment before submitting");
-              addCommentToArticle(article_id, newComment, user.username).then((comment) => {
-                setArticleComments((currentComments) => {
-                  return [comment, ...currentComments];
+              if (!disableCommenting) {
+                setDisableCommenting(true);
+                if (!user.username) return window.alert("Please sign in");
+                if (newComment.trim() === "") return window.alert("Please write a comment before submitting");
+                addCommentToArticle(article_id, newComment, user.username).then((comment) => {
+                  setArticleComments((currentComments) => {
+                    return [comment, ...currentComments];
+                  });
+                  setNewComment("");
+                  setDisableCommenting(false);
                 });
-                setNewComment("");
-              });
+              }
             }}
           >
             <h4>New comment:</h4>
