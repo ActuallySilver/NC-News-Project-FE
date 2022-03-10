@@ -31,12 +31,12 @@ export default function SingleArticle() {
         <section className="article-body">
           <p>{article.body}</p>
         </section>
-        <section className="article-comments">
+        <div className="article-comments">
           <h3>Comments</h3>
           {articleComments.map((comment) => {
             return <CommentCard key={comment.comment_id} comment={comment} />;
           })}
-        </section>
+        </div>
       </div>
     </div>
   );
