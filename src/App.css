@@ -4,6 +4,9 @@
 }
 .App {
   text-align: center;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
 }
 .Header {
   text-align: center;
@@ -51,10 +54,11 @@
   text-align: right;
   color: grey;
 }
+
 .article-details {
   width: 100%;
   display: grid;
-  grid-template-columns: 65vw auto;
+  grid-template-columns: 65vw 30vw;
   grid-template-rows: "auto auto auto";
   grid-template-areas:
     "body stats"
@@ -79,7 +83,6 @@
   display: inline-block;
   height: fit-content;
   border: grey 1px solid;
-  width: auto;
 }
 .article-stats {
   display: inline-block;
@@ -93,7 +96,6 @@
   height: fit-content;
   display: inline-block;
   margin-left: 10vw;
-  padding-right: 10px;
 }
 
 .article-body {
