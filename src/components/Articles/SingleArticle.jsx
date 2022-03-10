@@ -100,7 +100,7 @@ export default function SingleArticle() {
             <button>Post comment</button>
           </form>
           {articleComments.map((comment) => {
-            return <CommentCard key={comment.comment_id} comment={comment} />;
+            return <CommentCard setArticleComments={setArticleComments} key={comment.comment_id} comment={comment} />;
           })}
         </div>
       </div>
