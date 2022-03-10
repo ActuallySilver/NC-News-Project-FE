@@ -1,6 +1,7 @@
 const getTimePassedSince = (time) => {
   const currentTime = Date.now();
   const timePassed = currentTime - Date.parse(time);
+  if (timePassed < 0) return "just now";
   const years = Math.floor(timePassed / 1000 / 60 / 60 / 24 / 365.25);
   if (years !== 0) {
     if (years === 1) return years + " year ago";

@@ -10,6 +10,11 @@ export const getTopics = () => {
     return res.data.topics;
   });
 };
+export const getUsers = () => {
+  return newsApi.get("users").then((res) => {
+    return res.data.users;
+  });
+};
 
 export const getArticle = (article_id) => {
   return newsApi.get(`articles/${article_id}`).then((res) => {
@@ -26,5 +31,11 @@ export const getComments = (article_id) => {
 export const addVotesToArticle = (article_id, votes) => {
   return newsApi.patch(`/articles/${article_id}`, { inc_votes: votes }).then((res) => {
     return res.data.article;
+  });
+};
+
+export const addCommentToArticle = (article_id, body, username) => {
+  return newsApi.post(`/articles/${article_id}/comments`, { username, body }).then((res) => {
+    return res.data.comment;
   });
 };
