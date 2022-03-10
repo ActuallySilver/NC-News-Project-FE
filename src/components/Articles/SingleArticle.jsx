@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getArticle, getComments } from "../api";
+import { addVotesToArticle, getArticle, getComments } from "../api";
 import getTimePassedSince from "../getTimePassedSince";
 import CommentCard from "./CommentCard";
 
@@ -8,10 +8,23 @@ export default function SingleArticle() {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
   const [articleComments, setArticleComments] = useState([]);
+  const [voted, setVoted] = useState(false);
   useEffect(() => {
     getArticle(article_id).then(setArticle);
     getComments(article_id).then(setArticleComments);
   }, [article_id]);
+  function changeVotes(val) {
+    setVoted((currentVoted) => {
+      return !currentVoted;
+    });
+    addVotesToArticle(article_id, val).then(() => {
+      setArticle((currentArticle) => {
+        const copyArticle = { ...currentArticle };
+        copyArticle.votes += val;
+        return copyArticle;
+      });
+    });
+  }
 
   return (
     <div>
@@ -26,6 +39,24 @@ export default function SingleArticle() {
           <section className="article-stats">
             <h4>{article.votes} votes </h4>
             <h4>{article.comment_count} comments</h4>
+
+            {!voted ? (
+              <button
+                onClick={() => {
+                  changeVotes(1);
+                }}
+              >
+                Vote for article
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  changeVotes(-1);
+                }}
+              >
+                Remove vote
+              </button>
+            )}
           </section>
         </section>
         <section className="article-body">
