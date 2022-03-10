@@ -10,3 +10,15 @@ export const getTopics = () => {
     return res.data.topics;
   });
 };
+
+export const getArticle = (article_id) => {
+  return newsApi.get(`articles/${article_id}`).then((res) => {
+    return res.data.article;
+  });
+};
+
+export const getComments = (article_id) => {
+  return newsApi.get(`articles/${article_id}/comments`).then((res) => {
+    return res.data.comments;
+  });
+};
