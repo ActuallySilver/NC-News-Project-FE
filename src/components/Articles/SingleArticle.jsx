@@ -17,12 +17,11 @@ export default function SingleArticle() {
     setVoted((currentVoted) => {
       return !currentVoted;
     });
-    addVotesToArticle(article_id, val).then(() => {
-      setArticle((currentArticle) => {
-        const copyArticle = { ...currentArticle };
-        copyArticle.votes += val;
-        return copyArticle;
-      });
+    addVotesToArticle(article_id, val);
+    setArticle((currentArticle) => {
+      const copyArticle = { ...currentArticle };
+      copyArticle.votes += val;
+      return copyArticle;
     });
   }
 
