@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getArticle, getComments } from "../api";
 import getTimePassedSince from "../getTimePassedSince";
+import CommentCard from "./CommentCard";
 
 export default function SingleArticle() {
   const { article_id } = useParams();
