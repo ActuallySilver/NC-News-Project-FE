@@ -30,7 +30,7 @@ export default function CommentCard({ comment, setArticleComments }) {
               }
             }}
           >
-            Delete Comment
+            {isDeleting ? "Deleting..." : "Delete Comment"}
           </button>
         )}
       </dl>
