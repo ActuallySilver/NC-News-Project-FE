@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { addVotesToArticle, getArticle, getComments } from "../api";
+import { addCommentToArticle, addVotesToArticle, getArticle, getComments } from "../api";
 import getTimePassedSince from "../getTimePassedSince";
+import { UserContext } from "../Root/UserContext";
+import UseWindowSize from "../Root/useWindowSize";
 import CommentCard from "./CommentCard";
 
 export default function SingleArticle() {
@@ -9,6 +11,10 @@ export default function SingleArticle() {
   const [article, setArticle] = useState({});
   const [articleComments, setArticleComments] = useState([]);
   const [voted, setVoted] = useState(false);
+  const [newComment, setNewComment] = useState("");
+  const [disableCommenting, setDisableCommenting] = useState(false);
+  const { user } = useContext(UserContext);
+  const windowSize = UseWindowSize();
   useEffect(() => {
     getArticle(article_id).then(setArticle);
     getComments(article_id).then(setArticleComments);
@@ -63,6 +69,36 @@ export default function SingleArticle() {
         </section>
         <div className="article-comments">
           <h3>Comments</h3>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (!disableCommenting) {
+                setDisableCommenting(true);
+                if (!user.username) return window.alert("Please sign in");
+                if (newComment.trim() === "") return window.alert("Please write a comment before submitting");
+                addCommentToArticle(article_id, newComment, user.username).then((comment) => {
+                  setArticleComments((currentComments) => {
+                    return [comment, ...currentComments];
+                  });
+                  setNewComment("");
+                  setDisableCommenting(false);
+                });
+              }
+            }}
+          >
+            <h4>New comment:</h4>
+            <textarea
+              value={newComment}
+              onChange={(e) => {
+                setNewComment(e.target.value);
+              }}
+              name="comment_body"
+              id="comment_body"
+              cols={Math.floor(windowSize[0] / 8)}
+              rows="4"
+            ></textarea>
+            <button>Post comment</button>
+          </form>
           {articleComments.map((comment) => {
             return <CommentCard key={comment.comment_id} comment={comment} />;
           })}
