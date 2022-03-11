@@ -6,9 +6,12 @@ import ArticleNav from "./ArticleNav";
 
 export default function Articles() {
   const [articles, setArticles] = useState([]);
+  const [articlesError, setArticlesError] = useState(false);
   const { topic } = useParams();
   useEffect(() => {
-    getArticles(topic).then(setArticles);
+    getArticles(topic)
+      .then(setArticles)
+      .catch(() => {});
   }, [topic]);
   return (
     <div className="articles-container">
