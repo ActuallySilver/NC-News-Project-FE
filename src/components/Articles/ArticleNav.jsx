@@ -9,6 +9,11 @@ export default function ArticleNav() {
   const [sortBy, setSortBy] = useState("created_at");
   const [showFilters, setShowFilters] = useState(false);
 
+  function resetFilters() {
+    setOrder("DESC");
+    setSortBy("created_at");
+  }
+
   useEffect(() => {
     getTopics().then(setTopics);
   }, []);
@@ -20,15 +25,7 @@ export default function ArticleNav() {
       </Link>
       {topics.map((topic) => {
         return (
-          <Link
-            onClick={() => {
-              setOrder("DESC");
-              setSortBy("created_at");
-            }}
-            className="Link"
-            key={topic.slug}
-            to={"/topics/" + topic.slug}
-          >
+          <Link onClick={resetFilters} className="Link" key={topic.slug} to={"/topics/" + topic.slug}>
             {topic.slug}
           </Link>
         );

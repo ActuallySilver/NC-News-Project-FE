@@ -9,7 +9,7 @@ export default function Articles() {
   const [articles, setArticles] = useState([]);
 
   const [articlesError, setArticlesError] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const { topic } = useParams();
   useEffect(() => {
     getArticles({ topic, sort_by: searchParams.get("sort_by"), order: searchParams.get("order") })

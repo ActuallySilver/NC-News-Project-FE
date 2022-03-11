@@ -17,6 +17,9 @@ export default function ArticleCard({ article }) {
         <dt className="article-topic">{article.topic}</dt>
         <dt className="article-author">By {article.author}</dt>
         <dt className="article-timestamp">{getTimePassedSince(article.created_at)}</dt>
+        <dt>
+          {article.comment_count} Comments {article.votes} Votes
+        </dt>
       </dl>
     </div>
   );

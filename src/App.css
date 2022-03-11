@@ -104,6 +104,8 @@
   text-align: left;
   margin-left: 5vw;
   margin-bottom: 1rem;
+  padding-right: 5px;
+  border-right: rgb(116, 116, 116) 1px solid;
 }
 .article-comments {
   border-top: black 1px solid;

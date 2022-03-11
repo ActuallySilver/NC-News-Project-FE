@@ -1,46 +1,32 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { addCommentToArticle, addVotesToArticle, getArticle, getComments } from "../api";
+import { getArticle } from "../api";
 import getTimePassedSince from "../getTimePassedSince";
 import ErrorHandler from "../Root/ErrorHandler";
 import { UserContext } from "../Root/UserContext";
-import UseWindowSize from "../Root/useWindowSize";
-import CommentCard from "./CommentCard";
+import ArticleComments from "../Comments/ArticleComments";
+
+import VoteButton from "./VoteButton";
 
 export default function SingleArticle() {
   const [ArticleError, setArticleError] = useState(false);
-  const [CommentsError, setCommentsError] = useState(false);
+
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
-  const [articleComments, setArticleComments] = useState([]);
-  const [voted, setVoted] = useState(false);
-  const [newComment, setNewComment] = useState("");
-  const [disableCommenting, setDisableCommenting] = useState(false);
+
   const { user } = useContext(UserContext);
-  const windowSize = UseWindowSize();
-  useEffect(() => {
+
+  function loadArticle() {
     getArticle(article_id)
       .then(setArticle)
       .catch(() => {
         setArticleError({ code: 404, msg: "Article not found" });
       });
-    getComments(article_id)
-      .then(setArticleComments)
-      .catch(() => {
-        setCommentsError({ code: 404, msg: "Comments not found" });
-      });
-  }, [article_id]);
-  function changeVotes(val) {
-    setVoted((currentVoted) => {
-      return !currentVoted;
-    });
-    addVotesToArticle(article_id, val);
-    setArticle((currentArticle) => {
-      const copyArticle = { ...currentArticle };
-      copyArticle.votes += val;
-      return copyArticle;
-    });
   }
+
+  useEffect(() => {
+    loadArticle();
+  }, [article_id]);
 
   if (ArticleError) return <ErrorHandler error={ArticleError} />;
   return (
@@ -55,70 +41,13 @@ export default function SingleArticle() {
           </section>
           <section className="article-stats">
             <h4>{article.votes} votes </h4>
-            <h4>{article.comment_count} comments</h4>
-
-            {!voted ? (
-              <button
-                onClick={() => {
-                  changeVotes(1);
-                }}
-              >
-                Vote for article
-              </button>
-            ) : (
-              <button
-                onClick={() => {
-                  changeVotes(-1);
-                }}
-              >
-                Remove vote
-              </button>
-            )}
+            <VoteButton article_id={article_id} setArticle={setArticle} />
           </section>
         </section>
         <section className="article-body">
           <p>{article.body}</p>
         </section>
-        {CommentsError ? (
-          <ErrorHandler error={CommentsError} />
-        ) : (
-          <div className="article-comments">
-            <h3>Comments</h3>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                if (!disableCommenting) {
-                  setDisableCommenting(true);
-                  if (!user.username) return window.alert("Please sign in");
-                  if (newComment.trim() === "") return window.alert("Please write a comment before submitting");
-                  addCommentToArticle(article_id, newComment, user.username).then((comment) => {
-                    setArticleComments((currentComments) => {
-                      return [comment, ...currentComments];
-                    });
-                    setNewComment("");
-                    setDisableCommenting(false);
-                  });
-                }
-              }}
-            >
-              <h4>New comment:</h4>
-              <textarea
-                value={newComment}
-                onChange={(e) => {
-                  setNewComment(e.target.value);
-                }}
-                name="comment_body"
-                id="comment_body"
-                cols={Math.floor(windowSize[0] / 8)}
-                rows="4"
-              ></textarea>
-              <button>Post comment</button>
-            </form>
-            {articleComments.map((comment) => {
-              return <CommentCard setArticleComments={setArticleComments} key={comment.comment_id} comment={comment} />;
-            })}
-          </div>
-        )}
+        {<ArticleComments article_id={article_id} article={article} user={user} />}
       </div>
     </div>
   );
