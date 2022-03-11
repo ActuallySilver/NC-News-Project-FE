@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getArticles } from "../api";
+import ErrorHandler from "../Root/ErrorHandler";
 import ArticleCard from "./ArticleCard";
 import ArticleNav from "./ArticleNav";
 
@@ -11,9 +12,17 @@ export default function Articles() {
   useEffect(() => {
     getArticles(topic)
       .then(setArticles)
-      .catch(() => {});
+      .then(() => {
+        setArticlesError(false);
+      })
+      .catch(() => {
+        setArticlesError({ code: 400, msg: "Invalid search filters" });
+      });
   }, [topic]);
-  return (
+
+  return articlesError ? (
+    <ErrorHandler error={articlesError} />
+  ) : (
     <div className="articles-container">
       <ArticleNav />
       <>
