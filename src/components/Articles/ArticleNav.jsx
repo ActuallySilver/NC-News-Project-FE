@@ -5,8 +5,8 @@ import { getTopics } from "../api";
 export default function ArticleNav() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [topics, setTopics] = useState([]);
-  const [orderType, setOrderType] = useState("ASC");
-  const [orderBy, setOrderBy] = useState("created_at");
+  const [order, setOrder] = useState("DESC");
+  const [sortBy, setSortBy] = useState("created_at");
   const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
@@ -20,7 +20,15 @@ export default function ArticleNav() {
       </Link>
       {topics.map((topic) => {
         return (
-          <Link className="Link" key={topic.slug} to={"/topics/" + topic.slug}>
+          <Link
+            onClick={() => {
+              setOrder("DESC");
+              setSortBy("created_at");
+            }}
+            className="Link"
+            key={topic.slug}
+            to={"/topics/" + topic.slug}
+          >
             {topic.slug}
           </Link>
         );
@@ -42,8 +50,9 @@ export default function ArticleNav() {
             name="order_by"
             id="order_by"
             onChange={(e) => {
-              setOrderBy(e.target.value);
+              setSortBy(e.target.value);
             }}
+            value={sortBy}
           >
             <option value="created_at">date</option>
             <option value="comment_count">comment count</option>
@@ -51,10 +60,11 @@ export default function ArticleNav() {
           </select>
           {" by "}
           <select
+            value={order}
             name="order_type"
             id="order_type"
             onChange={(e) => {
-              setOrderType(e.target.value);
+              setOrder(e.target.value);
             }}
           >
             <option value="ASC">ascending</option>
@@ -62,7 +72,7 @@ export default function ArticleNav() {
           </select>
           <button
             onClick={() => {
-              setSearchParams({ sort_by: orderBy, order: orderType });
+              setSearchParams({ sort_by: sortBy, order: order });
             }}
           >
             Apply
