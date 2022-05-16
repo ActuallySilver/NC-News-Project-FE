@@ -21,5 +21,6 @@ Frontend: https://github.com/ActuallySilver/NC-News-Project-FE/
 `git clone https://github.com/ActuallySilver/NC-News-Project-FE.git`
 2. Navigate to the local repository using
 `cd NC-News-Project-FE`
-3. Run locally using
+3. Install dependencies using `npm i`
+4. Run locally using
 `npm start`
