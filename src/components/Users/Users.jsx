@@ -8,7 +8,7 @@ export default function Users() {
     getUsers().then(setUsers);
   }, []);
   return (
-    <div>
+    <div className="users-list">
       {users.map((user) => {
         return <UserCard key={user.username} userDetails={user} />;
       })}
