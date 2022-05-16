@@ -14,7 +14,8 @@ Backend: https://github.com/ActuallySilver/NC-News-Project
 
 Frontend: https://github.com/ActuallySilver/NC-News-Project-FE/
 
-### Minimum node version required: node v16.13.2
+#### Minimum node version required:
+`node v16.13.2`
 
 ## How to run locally:
 1. Clone the repository to your computer using 
