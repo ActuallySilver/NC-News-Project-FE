@@ -19,7 +19,7 @@ export default function ArticleNav() {
   }, []);
 
   return (
-    <div>
+    <div className="articles-navigation-bar">
       <Link className="Link" key={"all"} to="/">
         All
       </Link>
@@ -31,6 +31,7 @@ export default function ArticleNav() {
         );
       })}
       <button
+        className="articles-filter-button"
         onClick={() => {
           setShowFilters((currentSetting) => {
             return !currentSetting;
@@ -41,9 +42,10 @@ export default function ArticleNav() {
       </button>
 
       {showFilters && (
-        <section>
+        <section className="articles-navigation-filters">
           Order{" "}
           <select
+            className="articles-navigation-filters"
             name="order_by"
             id="order_by"
             onChange={(e) => {
@@ -57,6 +59,7 @@ export default function ArticleNav() {
           </select>
           {" by "}
           <select
+            className="articles-navigation-filters"
             value={order}
             name="order_type"
             id="order_type"
@@ -68,6 +71,7 @@ export default function ArticleNav() {
             <option value="DESC">decending</option>
           </select>
           <button
+            className="articles-navigation-filters-button"
             onClick={() => {
               setSearchParams({ sort_by: sortBy, order: order });
             }}
@@ -75,6 +79,7 @@ export default function ArticleNav() {
             Apply
           </button>
           <button
+            className="articles-navigation-filters-button"
             onClick={() => {
               setSearchParams({});
             }}

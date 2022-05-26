@@ -1,12 +1,16 @@
 * {
   padding: 0px;
   margin: 0px;
+  
 }
 .App {
   text-align: center;
   margin: 0;
   padding: 0;
-  width: 100vw;
+  width: 98vw;
+  min-height: 100vh;
+  background-image: url("./images/NC\ Logo.png");
+  
 }
 .Header {
   text-align: center;
@@ -17,107 +21,165 @@
 
 .nav-bar {
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
   color: black;
   font-size: 3vh;
   border-bottom: 1px solid;
+  max-width: 80vw;
 }
 
 .Link {
   margin: 5px;
-  color: black;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
   text-decoration: underline overline;
+  
 }
 .Link:hover {
-  background-color: #ffa4a9;
+  color: #00000080;
 }
 
 .Link:active {
-  background-color: #fb666d;
+  color: #00000030;
+  
 }
 .articles-container {
   display: grid;
-  justify-content: center;
+  
+}
+
+.articles-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(33%, 1fr));
+  list-style: none;
+  gap: 5px;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.articles-navigation-bar {
+  display:inline-block;
+  padding-top: 10px;
+  font-weight: bold;
+  font-size: 1.3rem; 
+  padding-bottom: 5px;
+}
+.articles-filter-button {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.articles-navigation-filters {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  font-size: 1.1rem;
+}
+
+.articles-navigation-filters-button{
+  font-size: 1.1rem;
+  margin-left: 5px;
 }
 
 .article-card {
+  border-color: rgb(0, 0, 0);
+  border-left-style: solid;
+  border-left-width: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  background-color: rgba(234, 234, 234, 0.95);
+  display: grid;
+  border-radius: 10px 4px 4px 10px;
   text-align: left;
-  margin: auto;
-  width: 90vw;
-  border: 2px solid black;
-  margin: 4px;
+  padding: 5px;
 }
 .article-card:hover {
-  border-color: #eb1b24;
+  border-color: rgba(255, 0, 0, 0.653);
+  background-color: rgba(234, 234, 234, 0.98);
+  border-left-width: 8px;
+  border-bottom-width: 3px;
+  border-radius: 15px 4px 4px 15px;
 }
+
+
 
 .article-timestamp {
   text-align: right;
   color: grey;
 }
 
-.article-details {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 65vw 30vw;
-  grid-template-rows: "auto auto auto";
-  grid-template-areas:
-    "body stats"
-    "body ."
-    "comments comments";
-  column-gap: 5vw;
+.single-article {
+  background-color: #ffffffc5;
+  text-align: left;
 }
-.stats {
-  grid-area: stats;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas:
-    "article-stats"
-    "article-creation-info";
+.article-creation-info {
+  text-transform: capitalize;
+  font-size: 0.9rem;
+}
+.article-author{
+  font-weight: bold;
 }
 
-.article-creation-info {
-  grid-area: article-creation-info;
-  color: rgb(116, 116, 116);
-  text-align: left;
-  margin-top: 0;
-  display: inline-block;
-  height: fit-content;
-  border: grey 1px solid;
+.article-details {
+margin-left: 3rem;
 }
-.article-stats {
-  display: inline-block;
-  align-self: flex-end;
-  grid-area: article-stats;
-  color: rgb(116, 116, 116);
-  text-align: left;
-  bottom: 0;
-  border: grey 1px solid;
-  border-bottom: none;
-  height: fit-content;
-  display: inline-block;
-  margin-left: 10vw;
+
+.article-time-since{
+  font-size: 0.8rem;
 }
 
 .article-body {
+  background-color: #e6e6e669;
   font-size: 1.3rem;
-  margin-top: 2rem;
+ 
+  border-top: black 1px solid;
+  border-bottom: black 1px solid;
+  
   grid-area: body;
   text-align: left;
-  margin-left: 5vw;
+  margin-right: 5rem;
+  margin-left: 3rem;
   margin-bottom: 1rem;
-  padding-right: 5px;
-  border-right: rgb(116, 116, 116) 1px solid;
+  margin-top: 1rem;
+ padding: 5px;
 }
+
+.article-votes { 
+  margin-left: 3rem;
+  text-align: left;
+margin-bottom: 3px;  
+}
+
 .article-comments {
-  margin-left: 20px;
-  margin-right: 20px;
-  border-top: black 1px solid;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  
   grid-area: comments;
   text-align: left;
-  background-color: rgb(255, 240, 240);
+}
+
+.article-comment-input {
+  text-align: left;
+  width: 80%;
+  border-style: none;
+  border-bottom:black 2px solid;
+  border-top:black 0.5px solid;
+  border-left:black 0.5px solid;
+  border-right:black 0.5px solid;
+  background-color: rgba(128, 128, 128, 0.068);
+ 
+}
+.article-comment-post {
+  margin-bottom: 2px;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .article-comment-card {
+  background-color: #ffffffd0;;
   margin: 0.1rem;
   border: black 2px solid;
   display: grid;
@@ -132,6 +194,7 @@
   padding: 5px;
 }
 .user-card {
+  background-color: #ffffff;
   border: black 2px solid; 
   display: grid;
   border-radius: 10px;

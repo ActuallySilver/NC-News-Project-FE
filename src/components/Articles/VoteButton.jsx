@@ -22,7 +22,7 @@ export default function VoteButton({ article_id, setArticle }) {
         changeVotes(1);
       }}
     >
-      Vote for article
+      Add vote
     </button>
   ) : (
     <button

@@ -27,11 +27,11 @@ export default function Articles() {
   ) : (
     <div className="articles-container">
       <ArticleNav />
-      <>
+      <div className="articles-list">
         {articles.map((article) => {
           return <ArticleCard key={article.title} article={article} />;
         })}
-      </>
+      </div>
     </div>
   );
 }

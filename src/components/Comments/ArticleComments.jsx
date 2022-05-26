@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { addCommentToArticle, getComments } from "../api";
 import ErrorHandler from "../Root/ErrorHandler";
-import UseWindowSize from "../Root/useWindowSize";
 import CommentCard from "./CommentCard";
 
 export default function ArticleComments({ article_id, article, user }) {
@@ -9,7 +8,6 @@ export default function ArticleComments({ article_id, article, user }) {
   const [articleComments, setArticleComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [disableCommenting, setDisableCommenting] = useState(false);
-  const windowSize = UseWindowSize();
 
   function loadComments() {
     getComments(article_id)
@@ -45,16 +43,17 @@ export default function ArticleComments({ article_id, article, user }) {
       >
         <h4>New comment:</h4>
         <textarea
+          className="article-comment-input"
           value={newComment}
           onChange={(e) => {
             setNewComment(e.target.value);
           }}
           name="comment_body"
           id="comment_body"
-          cols={Math.floor(windowSize[0] / 8)}
           rows="4"
         ></textarea>
-        <button>Post comment</button>
+        <br />
+        <button className="article-comment-post">Post comment</button>
       </form>
       {articleComments.map((comment) => {
         return <CommentCard setArticleComments={setArticleComments} key={comment.comment_id} comment={comment} />;

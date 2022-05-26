@@ -14,10 +14,11 @@ export default function ArticleCard({ article }) {
     >
       <h4>{article.title}</h4>
       <dl>
-        <dt className="article-topic">{article.topic}</dt>
         <dt className="article-author">By {article.author}</dt>
-        <dt className="article-timestamp">{getTimePassedSince(article.created_at)}</dt>
-        <dt>
+        <dt className="article-timestamp">
+          🕓 {getTimePassedSince(article.created_at)} | {article.topic}{" "}
+        </dt>
+        <dt className="article-timestamp">
           {article.comment_count} Comments {article.votes} Votes
         </dt>
       </dl>

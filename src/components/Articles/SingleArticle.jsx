@@ -30,25 +30,28 @@ export default function SingleArticle() {
 
   if (ArticleError) return <ErrorHandler error={ArticleError} />;
   return (
-    <div>
-      <h2>{article.title}</h2>
+    <div className="single-article">
       <div className="article-details">
+        <h1>{article.title}</h1>
+
         <section className="stats">
           <section className="article-creation-info">
-            <h5>{getTimePassedSince(article.created_at)}</h5>
-            <h4>{article.topic}</h4>
-            <h4>By {article.author}</h4>
-          </section>
-          <section className="article-stats">
-            <h4>{article.votes} votes </h4>
-            <VoteButton article_id={article_id} setArticle={setArticle} />
+            <p className="article-author">By {article.author}</p>
+            <p>NC News, England</p>
+
+            <p className="article-time-since">🕓 {getTimePassedSince(article.created_at)}</p>
           </section>
         </section>
-        <section className="article-body">
-          <p>{article.body}</p>
-        </section>
-        {<ArticleComments article_id={article_id} article={article} user={user} />}
       </div>
+      <section className="article-body">
+        <p>{article.body}</p>
+      </section>
+      <section className="article-votes">
+        <text>{article.votes} votes </text>
+        <VoteButton article_id={article_id} setArticle={setArticle} />
+      </section>
+
+      {<ArticleComments article_id={article_id} article={article} user={user} />}
     </div>
   );
 }
