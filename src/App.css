@@ -283,6 +283,25 @@ object-fit: contain;
   padding-right: 25px;
 }
 
+.article-comment-post:hover{
+  background-color: #b1161e;
+}
+.article-vote-button:hover {
+  background-color: #b1161e;
+}
+.delete-comment-btn:hover {
+background-color: #b1161e;
+}
+.article-comment-post:active{
+  background-color: #7d1016;
+}
+.article-vote-button:active {
+  background-color: #7d1016;
+}
+.delete-comment-btn:active {
+background-color: #7d1016;
+}
+
 .article-title-container{
   background-color: rgb(239,242,243);
 }
