@@ -14,7 +14,7 @@ export default function ArticleCard({ article }) {
     >
       <h4>{article.title}</h4>
       <dl>
-        <dt className="article-author">By {article.author}</dt>
+        <dt className="article-card-author">By {article.author}</dt>
         <dt className="article-timestamp">
           🕓 {getTimePassedSince(article.created_at)} | {article.topic}{" "}
         </dt>
