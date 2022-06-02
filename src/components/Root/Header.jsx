@@ -9,7 +9,7 @@ export default function Header() {
     <div className="Header">
       <div className="Header-top">
         <img className="header-nc-logo" src={NcLogo} alt="Site Logo" />
-        <img className="logged-in-user" src={user.avatar_url} alt="current user" />
+        <img className="logged-in-user" src={user.avatar_url} alt="" />
       </div>
       <NavBar />
     </div>
