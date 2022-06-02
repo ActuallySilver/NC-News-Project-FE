@@ -18,6 +18,7 @@ export default function VoteButton({ article_id, setArticle }) {
 
   return !voted ? (
     <button
+      className="article-vote-button"
       onClick={() => {
         changeVotes(1);
       }}
@@ -26,6 +27,7 @@ export default function VoteButton({ article_id, setArticle }) {
     </button>
   ) : (
     <button
+      className="article-vote-button"
       onClick={() => {
         changeVotes(-1);
       }}

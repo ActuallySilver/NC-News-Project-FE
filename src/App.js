@@ -10,6 +10,7 @@ import Users from "./components/Users/Users";
 
 function App() {
   const [user, setUser] = useState({});
+
   return (
     <BrowserRouter>
       <UserContext.Provider value={{ user, setUser }}>

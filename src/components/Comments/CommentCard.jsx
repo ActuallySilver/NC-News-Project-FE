@@ -4,19 +4,20 @@ import { deleteComment, getComments } from "../api";
 import getTimePassedSince from "../getTimePassedSince";
 import { UserContext } from "../Root/UserContext";
 
-export default function CommentCard({ comment, setArticleComments }) {
+export default function CommentCard({ comment, setArticleComments, profilePics }) {
   const { user } = useContext(UserContext);
   const { article_id } = useParams();
   const [isDeleting, setIsDeleting] = useState(false);
   return (
     <div className="article-comment-card">
-      <dl>
-        <dt>
-          <strong>{comment.author}</strong> {getTimePassedSince(comment.created_at)}
-        </dt>
-        <dt>{comment.body}</dt>
+      <div className="comment-details">
+        <img className="comment-profile-picture" src={profilePics[comment.author]} alt="author avatar" />
+        <text className="comment-author">{comment.author}</text>
+        <text className="comment-time-since">{getTimePassedSince(comment.created_at)}</text>
+
         {user.username === comment.author && (
           <button
+            className="delete-comment-btn"
             onClick={() => {
               if (!isDeleting) {
                 setIsDeleting(true);
@@ -33,7 +34,10 @@ export default function CommentCard({ comment, setArticleComments }) {
             {isDeleting ? "Deleting..." : "Delete Comment"}
           </button>
         )}
-      </dl>
+      </div>
+      <div className="comment-body">
+        <text>{comment.body}</text>
+      </div>
     </div>
   );
 }

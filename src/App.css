@@ -9,14 +9,32 @@
   padding: 0;
   width: 98vw;
   min-height: 100vh;
-  background-image: url("./images/NC\ Logo.png");
   
 }
 .Header {
+  width: 100%;
   text-align: center;
   font-size: 4vh;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(239,242,243);
   color: #eb1b24;
+}
+.Header-top{
+  display: grid;
+  align-items: center;
+  justify-content: center;  
+  grid-template-columns: 1fr 5fr 1fr;
+  grid-template-areas: ". logo avatar";
+}
+
+.logged-in-user{
+  margin-left: auto;
+  margin-right: 15px;
+  grid-area: avatar;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+overflow: hidden;
+object-fit: contain;
 }
 
 .nav-bar {
@@ -25,28 +43,46 @@
   margin-right: auto;
   color: black;
   font-size: 3vh;
-  border-bottom: 1px solid;
+  padding-top: 20px;
+  padding-bottom: 30px;
   max-width: 80vw;
 }
 
-.Link {
+.header-nc-logo{  
+  margin-left: auto;
+  margin-right: auto;
+  grid-area: logo;
+  margin-top: 30px;
+  max-width: 30%;
+  max-height: 90%;
+}
+
+.Nav-Bar-Link {
+  font-size: 1.9rem;
+  text-decoration: none;
   margin: 5px;
-  font-weight: bold;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  font-weight: 500;
   color: rgb(0, 0, 0);
-  text-decoration: underline overline;
   
 }
-.Link:hover {
+.Nav-Bar-Link:hover {
   color: #00000080;
 }
 
-.Link:active {
-  color: #00000030;
-  
+.Nav-Bar-Link:active {
+  color: #00000030;  
 }
+
+.navigation-down-arrow{
+  color:#eb1b24;  
+}
+
+
+
 .articles-container {
-  display: grid;
-  
+  display: grid;  
 }
 
 .articles-list {
@@ -67,6 +103,21 @@
   font-size: 1.3rem; 
   padding-bottom: 5px;
 }
+
+.articles-nav-link {
+  text-decoration: none;
+  color: black;
+  margin: 10px;
+}
+
+.articles-nav-link:hover {
+  color: #00000080;
+}
+
+.articles-nav-link:active {
+  color: #00000030;  
+}
+
 .articles-filter-button {
   font-weight: bold;
   font-size: 1.1rem;
@@ -81,20 +132,22 @@
 
 .articles-navigation-filters-button{
   font-size: 1.1rem;
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 .article-card {
+  
   border-color: rgb(0, 0, 0);
   border-left-style: solid;
   border-left-width: 5px;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  background-color: rgba(234, 234, 234, 0.95);
+  background-color: rgb(239,242,243);
   display: grid;
   border-radius: 10px 4px 4px 10px;
   text-align: left;
   padding: 5px;
+  margin: 5px;
 }
 .article-card:hover {
   border-color: rgba(255, 0, 0, 0.653);
@@ -104,86 +157,182 @@
   border-radius: 15px 4px 4px 15px;
 }
 
-
-
 .article-timestamp {
   text-align: right;
   color: grey;
 }
 
-.single-article {
-  background-color: #ffffffc5;
-  text-align: left;
+
+.single-article { 
+  text-align: center;
 }
-.article-creation-info {
-  text-transform: capitalize;
-  font-size: 0.9rem;
-}
-.article-author{
-  font-weight: bold;
+.article-title{
+  width: 25%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 2rem;
 }
 
-.article-details {
-margin-left: 3rem;
+.article-creation-info {
+  font-size: 0.9rem;
 }
+
+
+.article-details {
+  background-color: #ffffff;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.article-profile-pic-container{
+  background: linear-gradient(
+    to bottom, 
+    rgb(239,242,243) 0%, 
+    rgb(239,242,243) 50%, 
+    #ffffff 50%, 
+    #ffffff 100%
+  );
+}
+
+.article-author{
+  color: #eb1b24;
+  font-weight: 500;
+  font-size: 2rem;
+}
+
 
 .article-time-since{
   font-size: 0.8rem;
-}
-
-.article-body {
-  background-color: #e6e6e669;
-  font-size: 1.3rem;
- 
-  border-top: black 1px solid;
-  border-bottom: black 1px solid;
-  
-  grid-area: body;
-  text-align: left;
-  margin-right: 5rem;
-  margin-left: 3rem;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
- padding: 5px;
+  font-weight: 700;
 }
 
 .article-votes { 
-  margin-left: 3rem;
-  text-align: left;
-margin-bottom: 3px;  
+  text-align: center;
+  margin-bottom: 3px;   
+}
+
+.article-vote-count {
+  margin-top: 20px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.article-vote-button {
+  margin-top: 30px;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  border-radius: 12px;
+  border-style: none;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #eb1b24;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 30px; 
+  padding-right: 30px;
+
 }
 
 .article-comments {
+  margin-top: 50px;
   margin-left: 3rem;
   margin-right: 3rem;
   
   grid-area: comments;
-  text-align: left;
+  text-align: center;
 }
 
-.article-comment-input {
-  text-align: left;
-  width: 80%;
-  border-style: none;
-  border-bottom:black 2px solid;
-  border-top:black 0.5px solid;
-  border-left:black 0.5px solid;
-  border-right:black 0.5px solid;
-  background-color: rgba(128, 128, 128, 0.068);
- 
+.article-comments-header {
+  
+  color:#eb1b24;
+  font-size: 1.5rem;
+  font-weight: 700;
+
 }
+
+.article-comments-newcomment{
+  display: block;
+  color: #eb1b24;
+  font-size: 1.2rem;
+  margin-top: 20px;
+}
+
 .article-comment-post {
-  margin-bottom: 2px;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  margin-top: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  border-radius: 12px;
+  border-style: none;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #eb1b24;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 25px; 
+  padding-right: 25px;
 }
 
-.article-comment-card {
-  background-color: #ffffffd0;;
-  margin: 0.1rem;
-  border: black 2px solid;
-  display: grid;
-  grid-template-columns: 70vw 30vw;
+.article-title-container{
+  background-color: rgb(239,242,243);
+}
+
+
+
+.comment-details{
+  margin-right: 20px;
+  text-align: center;
+  grid-area: details;
+  display: block;
+ }
+
+.comment-author {
+  display: block;
+  color: #eb1b24;
+  font-weight: 700;
+}
+.comment-profile-picture{
+  display: block;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.comment-time-since {
+  display: block;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.comment-body {
+  text-align: left;
+  grid-area: body;
+}
+
+.delete-comment-btn {
+  margin-top: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  border-radius: 12px;
+  border-style: none;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background-color: #eb1b24;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 8px; 
+  padding-right: 8px;
 }
 
 .users-list {
@@ -216,3 +365,94 @@ margin-bottom: 3px;
   margin-right: auto;
 }
 
+.article-body {
+  background-color: rgb(239,242,243);
+  border-radius: 15px;  
+  font-size: 1.3rem;  
+  text-align: left;
+  padding: 40px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.single-article-profile-pic{
+  margin-top: 50px;
+  margin-bottom: 20px;
+ 
+ box-shadow: 0px 0px 8px black;
+}
+
+.article-comment-input {
+  font-size: 1.3rem;  
+  text-align: left;
+  padding: 20px;
+  margin-top: 50px;
+  margin-top: 15px;
+  height: 100px;
+  border-style: solid;
+  border-radius: 15px;
+  background-color: rgba(128, 128, 128, 0.068); 
+}
+
+.article-comment-card {
+  margin: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ffffffd0;
+  padding: 20px;
+  border-radius: 15px;
+ background-color: rgb(239,242,243);
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr;
+  grid-template-areas: "details body";
+}
+
+@media (max-width: 800px) {
+  .article-body {
+    width: 70%;
+  }
+  .single-article-profile-pic{
+    max-width: 60%; 
+    max-height: 50%;
+  }
+  .article-comment-input {
+width: 75%;
+  }
+  .article-comment-card {
+width: 75%;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 1200px) {
+  .article-body {
+    width: 50%;
+  }
+  .single-article-profile-pic{
+    max-width: 45%; 
+    max-height: 50%;
+  }
+  .article-comment-input {
+    width: 55%;
+      }
+  .article-comment-card {
+    width: 55%;
+      }
+}
+
+@media (min-width: 1200px) {
+  .article-body {
+    width: 30%;
+  }
+  .single-article-profile-pic{
+    max-width: 25%; 
+    max-height: 50%;
+  }
+  .article-comment-input {
+    width: 35%;
+      }
+  .article-comment-card {
+    width: 35%;
+      }
+}

@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { getTopics } from "../api";
 
 export default function ArticleNav() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
   const [topics, setTopics] = useState([]);
   const [order, setOrder] = useState("DESC");
   const [sortBy, setSortBy] = useState("created_at");
@@ -20,13 +20,13 @@ export default function ArticleNav() {
 
   return (
     <div className="articles-navigation-bar">
-      <Link className="Link" key={"all"} to="/">
-        All
+      <Link className="articles-nav-link" key={"all"} to="/">
+        All <text className="navigation-down-arrow">˅</text>
       </Link>
       {topics.map((topic) => {
         return (
-          <Link onClick={resetFilters} className="Link" key={topic.slug} to={"/topics/" + topic.slug}>
-            {topic.slug}
+          <Link onClick={resetFilters} className="articles-nav-link" key={topic.slug} to={"/topics/" + topic.slug}>
+            {topic.slug} <text className="navigation-down-arrow">˅</text>
           </Link>
         );
       })}

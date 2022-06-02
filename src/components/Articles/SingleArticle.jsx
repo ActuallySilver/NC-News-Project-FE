@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getArticle } from "../api";
+import { getArticle, getUserByUsername } from "../api";
 import getTimePassedSince from "../getTimePassedSince";
 import ErrorHandler from "../Root/ErrorHandler";
 import { UserContext } from "../Root/UserContext";
@@ -13,6 +13,7 @@ export default function SingleArticle() {
 
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
+  const [author, setAuthor] = useState({});
 
   const { user } = useContext(UserContext);
 
@@ -25,21 +26,24 @@ export default function SingleArticle() {
   }
 
   useEffect(() => {
-    loadArticle();
-  }, [article_id]);
+    getUserByUsername(article.author).then(setAuthor);
+  }, [article]);
+  useEffect(loadArticle, [article_id]);
 
   if (ArticleError) return <ErrorHandler error={ArticleError} />;
   return (
     <div className="single-article">
       <div className="article-details">
-        <h1>{article.title}</h1>
-
+        <div className="article-title-container">
+          <h1 className="article-title">{article.title}</h1>
+        </div>
+        <div className="article-profile-pic-container">
+          <img className="single-article-profile-pic" src={author.avatar_url} alt={author.username} />
+        </div>
         <section className="stats">
           <section className="article-creation-info">
             <p className="article-author">By {article.author}</p>
-            <p>NC News, England</p>
-
-            <p className="article-time-since">🕓 {getTimePassedSince(article.created_at)}</p>
+            <p className="article-time-since">NC News, England | {getTimePassedSince(article.created_at)}</p>
           </section>
         </section>
       </div>
@@ -47,10 +51,9 @@ export default function SingleArticle() {
         <p>{article.body}</p>
       </section>
       <section className="article-votes">
-        <text>{article.votes} votes </text>
+        <text className="article-vote-count">{article.votes} votes </text>
         <VoteButton article_id={article_id} setArticle={setArticle} />
       </section>
-
       {<ArticleComments article_id={article_id} article={article} user={user} />}
     </div>
   );

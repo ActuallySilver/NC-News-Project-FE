@@ -15,6 +15,11 @@ export const getUsers = () => {
     return res.data.users;
   });
 };
+export const getUserByUsername = (username) => {
+  return newsApi.get(`users/${username}`).then((res) => {
+    return res.data.user;
+  });
+};
 
 export const getArticle = (article_id) => {
   return newsApi.get(`articles/${article_id}`).then((res) => {

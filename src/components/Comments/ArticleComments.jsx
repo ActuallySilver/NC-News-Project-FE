@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { addCommentToArticle, getComments } from "../api";
+import { addCommentToArticle, getComments, getUserByUsername } from "../api";
 import ErrorHandler from "../Root/ErrorHandler";
 import CommentCard from "./CommentCard";
 
@@ -8,6 +8,7 @@ export default function ArticleComments({ article_id, article, user }) {
   const [articleComments, setArticleComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [disableCommenting, setDisableCommenting] = useState(false);
+  const [profilePics, setProfilePics] = useState({});
 
   function loadComments() {
     getComments(article_id)
@@ -16,14 +17,26 @@ export default function ArticleComments({ article_id, article, user }) {
         setCommentsError({ code: 404, msg: "Comments not found" });
       });
   }
-  useEffect(() => {
-    loadComments();
-  }, []);
+  function getProfilePic(username) {
+    if (profilePics[username]) return profilePics[username];
+    return getUserByUsername(username)
+      .then(({ avatar_url }) => {
+        return setProfilePics((currentProfiles) => {
+          currentProfiles[username] = avatar_url;
+          return currentProfiles;
+        });
+      })
+      .then((profilePics) => {
+        return profilePics[username];
+      });
+  }
+
+  useEffect(loadComments, [article_id]);
   return CommentsError ? (
     <ErrorHandler error={CommentsError} />
   ) : (
     <div className="article-comments">
-      <h3>Comments ({article.comment_count})</h3>
+      <text className="article-comments-header">Comments ({article.comment_count})</text>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -41,7 +54,7 @@ export default function ArticleComments({ article_id, article, user }) {
           }
         }}
       >
-        <h4>New comment:</h4>
+        <text className="article-comments-newcomment">New comment:</text>
         <textarea
           className="article-comment-input"
           value={newComment}
@@ -56,7 +69,8 @@ export default function ArticleComments({ article_id, article, user }) {
         <button className="article-comment-post">Post comment</button>
       </form>
       {articleComments.map((comment) => {
-        return <CommentCard setArticleComments={setArticleComments} key={comment.comment_id} comment={comment} />;
+        getProfilePic(comment.author);
+        return <CommentCard profilePics={profilePics} setArticleComments={setArticleComments} key={comment.comment_id} comment={comment} />;
       })}
     </div>
   );
